@@ -1,0 +1,6 @@
+#!/bin/sh
+# Modifies the release by emiting a yaml file
+# I don't want to change anything, so emiting an empty yaml file as in null-buildpack
+# https://github.com/ryandotsmith/null-buildpack/blob/master/bin/release
+
+echo "--- {}"

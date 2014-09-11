@@ -1,0 +1,6 @@
+#!/bin/sh
+
+# https://devcenter.heroku.com/articles/buildpack-api
+
+echo "Cmake-and-Pkg-config" # Don't know if I'm allowed to have spaces in the name, and don't feel like experimenting to find out
+exit 0                      # Assuming that if you put this as a buildpack, then it appplies

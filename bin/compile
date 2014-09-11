@@ -8,6 +8,12 @@ build_dir="$1" # location of the Heroku app
 cache_dir="$2" # persisted between builds
 env_dir="$3"   # a directory that contains a file for each of the application’s configuration variables (I assume the ones from `heroku config:set a=b`)
 
+pwd
+pwd
+pwd
+pwd
+pwd
+
 # "Buildpack developers are encouraged to match the Heroku push style when displaying output."
 #    -- https://devcenter.heroku.com/articles/buildpack-api
 function say {
@@ -37,13 +43,15 @@ function say {
 # sha1 'b7e4acaa7fc7adf54c1b465c712e5ea473b8b74f'
 
 # If I want to build it from source, looks like I do this
-say "curling http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz"
-# curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
-# tar -xf "cmake-3.0.1.tar.gz"
-# cd "cmake-3.0.1"
-# ./bootstrap
-# make
-# make install
+say "Making cmake"
+
+
+curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
+tar -xf "cmake-3.0.1.tar.gz"
+cd "cmake-3.0.1"
+./bootstrap
+make
+make install
 
 # But there's a binary!
 # curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"

@@ -8,5 +8,20 @@ build_dir="$1" # location of the Heroku app
 cache_dir="$2" # persisted between builds
 env_dir="$3"   # a directory that contains a file for each of the application’s configuration variables (I assume the ones from `heroku config:set a=b`)
 
+# "Buildpack developers are encouraged to match the Heroku push style when displaying output."
+#    -- https://devcenter.heroku.com/articles/buildpack-api
+function say {
+  if test "$#" -eq 0
+  then
+    return
+  fi
 
-echo "======> HELLO FROM CMAKE AND PKG-CONFIG"
+  echo "-----> $1"
+  shift
+
+  for line in "$@"
+  do
+    echo "       $line"
+  done
+}
+

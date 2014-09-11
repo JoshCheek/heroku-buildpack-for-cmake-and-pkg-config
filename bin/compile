@@ -25,3 +25,48 @@ function say {
   done
 }
 
+# ===== CMAKE =====
+# Homepage: http://www.cmake.org/download/
+#
+# This is derived from https://github.com/Homebrew/homebrew/blob/38f112f25e9ab919465a19dbe5e70cf5abcf7e05/Library/Formula/cmake.rb
+
+# Ideally could use these, but can't figure out how to just get that one ver at that one sha
+# so going with curl instead.
+#
+# head 'http://cmake.org/cmake.git'
+# sha1 'b7e4acaa7fc7adf54c1b465c712e5ea473b8b74f'
+
+# If I want to build it from source, looks like I do this
+say "curling http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz"
+curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
+tar -xf "cmake-3.0.1.tar.gz"
+cd "cmake-3.0.1"
+./bootstrap
+make
+make install
+
+# But there's a binary!
+# curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"
+# tar -xf "cmake-3.0.2.tar.gz"
+
+
+# TODO:
+#   Run this in cache dir?
+#   Then can check if I've done it before repeating my work
+
+# args = %W[
+#   --prefix=#{prefix}
+#   --system-libs
+#   --no-system-libarchive
+#   --datadir=/share/cmake
+#   --docdir=/share/doc/cmake
+#   --mandir=/share/man
+# ]
+
+# system "./bootstrap", *args
+# system "make"
+# system "make install"
+# end
+
+# (testpath/'CMakeLists.txt').write('find_package(Ruby)')
+# system "#{bin}/cmake", '.'

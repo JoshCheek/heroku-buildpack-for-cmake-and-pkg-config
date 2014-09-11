@@ -1,0 +1,12 @@
+#!/bin/sh
+
+# https://devcenter.heroku.com/articles/buildpack-api
+# Gets called like this:
+#   bin/compile BUILD_DIR CACHE_DIR ENV_DIR
+
+build_dir="$1" # location of the Heroku app
+cache_dir="$2" # persisted between builds
+env_dir="$3"   # a directory that contains a file for each of the application’s configuration variables (I assume the ones from `heroku config:set a=b`)
+
+
+echo "======> HELLO FROM CMAKE AND PKG-CONFIG"

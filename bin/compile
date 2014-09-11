@@ -38,12 +38,12 @@ function say {
 
 # If I want to build it from source, looks like I do this
 say "curling http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz"
-curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
-tar -xf "cmake-3.0.1.tar.gz"
-cd "cmake-3.0.1"
-./bootstrap
-make
-make install
+# curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
+# tar -xf "cmake-3.0.1.tar.gz"
+# cd "cmake-3.0.1"
+# ./bootstrap
+# make
+# make install
 
 # But there's a binary!
 # curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"

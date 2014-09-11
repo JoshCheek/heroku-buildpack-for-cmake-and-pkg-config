@@ -1,8 +1,29 @@
 My app uses [rugged](http://rubygems.org/gems/rugged).
 To compile this, I need cmake and pkg-config.
 Going to see if I can't get that stuffs installed with this buildpack.
-Presumably I can use [buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi)
-to still install Ruby and such.
+
+---
+
+Use [buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi)
+to add this to the build.
+Example of my [.buildpacks](https://github.com/JoshCheek/miniature-octo-ironman/blob/8d5cc7396a7fae3777387be921c6594c6bd4b5d5/.buildpacks).
+Example of setting it up in [my repo](https://github.com/JoshCheek/miniature-octo-ironman/):
+
+```
+# Use multi-buildpacks
+$ heroku buildpacks:set ddollar/multi
+
+# Make sure it worked
+$ heroku config | grep BUILD
+BUILDPACK_URL: https://codon-buildpacks.s3.amazonaws.com/buildpacks/ddollar/multi.tgz
+
+# Configure it to use this buildpack and Ruby
+$ cat .buildpacks
+https://github.com/JoshCheek/heroku-buildpack-for-cmake-and-pkg-config.git
+https://github.com/heroku/heroku-buildpack-ruby.git
+```
+
+
 
 MIT-LICENSE
 -----------

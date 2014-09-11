@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # https://devcenter.heroku.com/articles/buildpack-api
 # Gets called like this:

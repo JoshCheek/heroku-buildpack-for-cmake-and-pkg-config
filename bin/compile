@@ -65,11 +65,14 @@ tar -xf "cmake-3.0.2.tar.gz"
 # Move binaries directly into our app's binary (IDK if non-ruby libs have this setup, but it's the only apparent option to me w/o forking every other fucking buildpack -- see comment in bin/release for more info)
 app_bin="$build_dir/bin"
 mkdir -p "$app_bin"
-for program in `ls ./cmake-3.0.2-Linux-i386/bin`
+
+cmake_bin="./cmake-3.0.2-Linux-i386"
+for program in `ls $cmake_bin/bin`
 do
-  new_location="$app_bin/$(basename $program)"
-  say "Copying '$program' to '$new_location'"
-  cp "$program" "$new_location"
+  to_location="$app_bin/$program"
+  from_location="$cmake_bin/$program"
+  say "Copying '$from_location' to '$to_location'"
+  cp "$from_location" "$to_location"
 done
 
 # TODO:

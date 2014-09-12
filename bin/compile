@@ -78,6 +78,10 @@ tar -xf "cmake-3.0.2.tar.gz"
 say "Curling pkg-config from http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz"
 curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-config-0.28.tar.gz
 tar -xf "pkg-config-0.28.tar.gz"
+cd "pkg-config-0.28"
+make
+make check
+cd ..
 
 say "Here are all the executable files:"
 find . -type f -perm +111

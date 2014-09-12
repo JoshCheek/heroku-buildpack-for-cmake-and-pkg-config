@@ -1,11 +1,49 @@
-#!/usr/bin/env ruby
-# Modifies the release by emiting a yaml file
-# I don't want to change anything, so emiting an empty yaml file as in null-buildpack
-# https://github.com/ryandotsmith/null-buildpack/blob/master/bin/release
+#!/bin/sh
 
-pkg_config_path = File.expand_path "pkg-config-0.28/bin"
-cmake_path      = File.expand_path "cmake-3.0.2-Linux-i386/bin"
-path            = "#{pkg_config_path}:#{cmake_path}:#{ENV['PATH']}"
+# This file does nothing, and here is why:
+#
+# I need to still run the Ruby language buildpack after I compile these binaries
+#   (Rugged needs them, so this is necessary, but Ruby buildpack compiles Rugged, so I need that, too)
+#   So I need to use a multi-buildpack, since Heroku doesn't have a concept of multiple buildpacks
+#
+# There are two multi buildpacks, both of which have serious issues:
+#   ddollar/heroku-buildpack-multi
+#     https://github.com/ddollar/heroku-buildpack-multi/blob/935057197ec623c8b7387448875cb93f77e0b78f/bin/compile#L54-56
+#     the mult buildpack totally fucking ignores that I need to export env vars from my buildpack to the next one
+#     (my language needs to be able to find the binaries I compiled, so need to set PATH)
+#
+#     There *is* a pull request to fix this: https://github.com/ddollar/heroku-buildpack-multi/pull/11
+#     but that's 1.5 years old... (wtf)
+#
+#     We could maybe set the vars in the env dir (third arg to compile),
+#     BUT even though the version on Github takes into account the env dir
+#     https://github.com/ddollar/heroku-buildpack-multi/blob/935057197ec623c8b7387448875cb93f77e0b78f/bin/compile#L48
+#     the one on Heroku does not...
+#
+#     The Heroku version is not up to date with the Github version...
+#
+#   vizify/heroku-buildpack-multi
+#     Does the same thing, as ddollar/heroku-buildpack-multi, except it actually does pass the env dir.
+#     So, that's promising... except it ALSO blacklists what env vars my buildpack can export! (fuck you, btw)
+#     https://github.com/vizify/heroku-buildpack-multi/blob/04c4a692e464e5e52bd193c8e6a3d68a004d3aa1/bin/compile#L16
+#     And since I need to put my binaries in the PATH, I'm in the blacklist
+#
+# So I could hack around all this by setting buildpack to vizify/multi, and then writing PATH into the env dir...
+# Except even the Ruby buildpack blacklists these vars:
+# https://github.com/heroku/heroku-buildpack-ruby/blob/bf71b01eab57390808226898cf091f08a4c93e3e/lib/language_pack/shell_helpers.rb#L25-38
 
-require 'yaml'
-puts YAML.dump path
+# There's allegedly also a .profile.d, but this doesn't do shit
+# There's also a .profile, an sh script, but it only runs when dino starts,
+# not before language pack sets up the env
+
+# ******* SO THERE IS NO WAY TO PUT MY BIN DIRECTORIES INTO THE PATH! *******
+# So instead, assume knowledge about target, and just fucking move my binaries into it's bin directory after compilation
+# which means there's no env vars for this file to change.
+# So emit an empty yaml document like the null-buildpack: https://github.com/ryandotsmith/null-buildpack/blob/2ac7a6fa2aaf54d712a224d354ccc93f7e1503b3/bin/release
+echo "--- {}"
+
+
+
+# If you also have need to explore Heroku buildpacks, I made a helper buildpack you can stick up there
+# that just emits as much information as I could think of that might be helpful:
+# https://github.com/JoshCheek/heroku-buildpack-fuck-everything

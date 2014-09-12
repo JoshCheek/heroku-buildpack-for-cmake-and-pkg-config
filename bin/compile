@@ -58,6 +58,20 @@ say "Curling cmake from http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.t
 curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"
 tar -xf "cmake-3.0.2.tar.gz"
 
+# Uncomment this to find binaries:
+# say "Here are all the executable files:"
+# find . -type f -perm +111
+
+# Move binaries directly into our app's binary (IDK if non-ruby libs have this setup, but it's the only apparent option to me w/o forking every other fucking buildpack -- see comment in bin/release for more info)
+app_bin="$build_dir/bin"
+mkdir -p "$app_bin"
+for program in `ls ./cmake-3.0.2-Linux-i386/bin`
+do
+  new_location="$app_bin/$(basename $program)"
+  say "Copying '$program' to '$new_location'"
+  cp "$program" "$new_location"
+done
+
 # TODO:
 #   Run this in cache dir?
 #   Then can check if I've done it before repeating my work
@@ -82,6 +96,3 @@ tar -xf "cmake-3.0.2.tar.gz"
 # make
 # make check
 # cd ..
-
-say "Here are all the executable files:"
-find . -type f -perm +111

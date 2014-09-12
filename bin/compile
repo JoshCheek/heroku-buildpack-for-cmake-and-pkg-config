@@ -30,7 +30,6 @@ say "Working in $(pwd)"
 
 # ===== CMAKE =====
 # Homepage: http://www.cmake.org/download/
-#
 # This is derived from https://github.com/Homebrew/homebrew/blob/38f112f25e9ab919465a19dbe5e70cf5abcf7e05/Library/Formula/cmake.rb
 
 # Ideally could use these, but can't figure out how to just get that one ver at that one sha
@@ -39,24 +38,24 @@ say "Working in $(pwd)"
 # head 'http://cmake.org/cmake.git'
 # sha1 'b7e4acaa7fc7adf54c1b465c712e5ea473b8b74f'
 
-# If I want to build it from source, looks like I do this
-say "Curling cmake from http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz"
-curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
+# # Try compiling from source
+# say "Curling cmake from http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz"
+# curl 'http://www.cmake.org/files/v3.0/cmake-3.0.1.tar.gz' > "cmake-3.0.1.tar.gz"
+#
+# say 'Extracting cmake'
+# tar -xf "cmake-3.0.1.tar.gz"
+#
+# say 'Running bootstrap'
+# cd "cmake-3.0.1"
+# ./bootstrap
+#
+# say 'Making it'
+# make
 
-say 'Extracting cmake'
-tar -xf "cmake-3.0.1.tar.gz"
-
-say 'Running bootstrap'
-cd "cmake-3.0.1"
-./bootstrap
-
-say 'Making it'
-make
-
-# But there's a binary!
-# curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"
-# tar -xf "cmake-3.0.2.tar.gz"
-
+# Try downloading the cmake binary
+say "Curling cmake from http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz"
+curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.0.2.tar.gz"
+tar -xf "cmake-3.0.2.tar.gz"
 
 # TODO:
 #   Run this in cache dir?
@@ -78,3 +77,12 @@ make
 
 # (testpath/'CMakeLists.txt').write('find_package(Ruby)')
 # system "#{bin}/cmake", '.'
+
+
+# ===== PKG-CONFIG =====
+# Homepage: http://pkgconfig.freedesktop.org
+# This is derived from https://github.com/Homebrew/homebrew/blob/45e07c0e85c89583c675632ed3fb7da1a32a4180/Library/Formula/pkg-config.rb
+
+say "Curling pkg-config from http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz"
+curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-config-0.28.tar.gz
+tar -xf "pkg-config-0.28.tar.gz"

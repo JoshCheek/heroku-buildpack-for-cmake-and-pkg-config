@@ -3,7 +3,9 @@
 # I don't want to change anything, so emiting an empty yaml file as in null-buildpack
 # https://github.com/ryandotsmith/null-buildpack/blob/master/bin/release
 
-PATH="cmake-3.0.1/bin"
+# PATH="cmake-3.0.1/bin"
+PATH="pkg-config-0.28/bin:$PATH"
+PATH="cmake-3.0.2/bin:$PATH"
 
 echo "---"
 echo "PATH: $PATH"

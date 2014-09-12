@@ -66,8 +66,8 @@ find . -type f -perm +111
 app_bin="$build_dir/bin"
 mkdir -p "$app_bin"
 
-cmake_bin="./cmake-3.0.2-Linux-i386"
-for program in `ls $cmake_bin/bin`
+cmake_bin="./cmake-3.0.2-Linux-i386/bin"
+for program in `ls $cmake_bin`
 do
   to_location="$app_bin/$program"
   from_location="$cmake_bin/$program"

@@ -70,15 +70,6 @@ tar -xf "cmake-3.0.2.tar.gz"
 #   --mandir=/share/man
 # ]
 
-# system "./bootstrap", *args
-# system "make"
-# system "make install"
-# end
-
-# (testpath/'CMakeLists.txt').write('find_package(Ruby)')
-# system "#{bin}/cmake", '.'
-
-
 # ===== PKG-CONFIG =====
 # Homepage: http://pkgconfig.freedesktop.org
 # This is derived from https://github.com/Homebrew/homebrew/blob/45e07c0e85c89583c675632ed3fb7da1a32a4180/Library/Formula/pkg-config.rb

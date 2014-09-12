@@ -59,8 +59,8 @@ curl "http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz" > "cmake-3.
 tar -xf "cmake-3.0.2.tar.gz"
 
 # Uncomment this to find binaries:
-say "Here are all the executable files:"
-find . -type f -perm +111
+# say "Here are all the executable files:"
+# find . -type f -perm +111
 
 # Move binaries directly into our app's binary (IDK if non-ruby libs have this setup, but it's the only apparent option to me w/o forking every other fucking buildpack -- see comment in bin/release for more info)
 app_bin="$build_dir/bin"

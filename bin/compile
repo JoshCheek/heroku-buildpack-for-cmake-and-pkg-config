@@ -51,6 +51,7 @@ say "Working in $(pwd)"
 #
 # say 'Making it'
 # make
+# cd ..
 
 # Try downloading the cmake binary
 say "Curling cmake from http://www.cmake.org/files/v3.0/cmake-3.0.2-Linux-i386.tar.gz"
@@ -77,3 +78,6 @@ tar -xf "cmake-3.0.2.tar.gz"
 say "Curling pkg-config from http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz"
 curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-config-0.28.tar.gz
 tar -xf "pkg-config-0.28.tar.gz"
+
+say "Here are all the executable files:"
+find . -type f -perm +111 | grep -v

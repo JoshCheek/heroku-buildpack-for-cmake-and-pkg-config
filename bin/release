@@ -1,5 +1,15 @@
 #!/bin/sh
 
+# This is a rant.
+# Before it begins, know that I am totally on board with
+#   "If you have a problem with somebodies code, send a fucking pull request."
+#   http://philsturgeon.uk/blog/2014/08/stop-pretending-everything-is-ok
+# But some of this stuff was fixed in unmerged PRs 1.5 years ago.
+# It's not maintained, so I can't fix it.
+
+
+
+
 # This file does nothing, and here is why:
 #
 # I need to still run the Ruby language buildpack after I compile these binaries
@@ -28,21 +38,33 @@
 #     https://github.com/vizify/heroku-buildpack-multi/blob/04c4a692e464e5e52bd193c8e6a3d68a004d3aa1/bin/compile#L16
 #     And since I need to put my binaries in the PATH, I'm in the blacklist
 #
-# So I could hack around all this by setting buildpack to vizify/multi, and then writing PATH into the env dir...
-# Except even the Ruby buildpack blacklists these vars:
+#     So I could hack around all this by setting buildpack to vizify/multi, and then writing PATH into the env dir...
+#     Except that it explicitly assumes I'm installing node for some utterly unknown reason
+#     https://github.com/vizify/heroku-buildpack-multi/blob/04c4a692e464e5e52bd193c8e6a3d68a004d3aa1/bin/compile#L75-92
+#     which I'm not, so it blows up even when this buildpack executes successfully.
+#
+# BUT! Even if I were to use the vizify one so I could write to the env dir
+# and then fake out the node bullshit so it doesn't blow up
+# and set my env vars in the env dir since it doesn't respect the release file
+# IT STILL WOULDN'T MATTER, because the Ruby buildpack blacklists these vars, too!
 # https://github.com/heroku/heroku-buildpack-ruby/blob/bf71b01eab57390808226898cf091f08a4c93e3e/lib/language_pack/shell_helpers.rb#L25-38
+#
+# WHICH EVEN THEY HAVE TO HACK AROUND, BY EXPLICITLY GIVING THEIR BUILDPACKS KNOWLEDGE OF EACH OTHER!!!!!!!
+# https://github.com/heroku/heroku-buildpack-ruby/blob/bf71b01eab57390808226898cf091f08a4c93e3e/lib/language_pack/ruby.rb#L709-713
 
-# There's allegedly also a .profile.d, but this doesn't do shit
-# There's also a .profile, an sh script, but it only runs when dino starts,
-# not before language pack sets up the env
+
 
 # ******* SO THERE IS NO WAY TO PUT MY BIN DIRECTORIES INTO THE PATH! *******
 # So instead, assume knowledge about target, and just fucking move my binaries into it's bin directory after compilation
-# which means there's no env vars for this file to change.
-# So emit an empty yaml document like the null-buildpack: https://github.com/ryandotsmith/null-buildpack/blob/2ac7a6fa2aaf54d712a224d354ccc93f7e1503b3/bin/release
+# (https://github.com/JoshCheek/heroku-buildpack-for-cmake-and-pkg-config/blob/3cb68a6471cd1499230aeae395598f356b83bfb1/bin/compile#L65-76)
+# Which means there's no env vars for this file to change. (ie both multi buildpacks render it useless)
+# So emit an empty yaml document like the null-buildpack: (https://github.com/ryandotsmith/null-buildpack/blob/2ac7a6fa2aaf54d712a224d354ccc93f7e1503b3/bin/release)
 echo "--- {}"
 
 
+
+# There's allegedly also a .profile.d, but this doesn't do shit
+# There's also a .profile, an sh script, but it only runs when dino starts, not before language pack sets up the env
 
 # If you also have need to explore Heroku buildpacks, I made a helper buildpack you can stick up there
 # that just emits as much information as I could think of that might be helpful:

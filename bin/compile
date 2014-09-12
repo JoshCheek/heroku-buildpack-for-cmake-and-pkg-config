@@ -80,4 +80,4 @@ curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-co
 tar -xf "pkg-config-0.28.tar.gz"
 
 say "Here are all the executable files:"
-find . -type f -perm +111 | grep -v
+find . -type f -perm +111

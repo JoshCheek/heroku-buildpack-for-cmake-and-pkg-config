@@ -1,11 +1,11 @@
-#!/bin/sh
+#!/usr/bin/env ruby
 # Modifies the release by emiting a yaml file
 # I don't want to change anything, so emiting an empty yaml file as in null-buildpack
 # https://github.com/ryandotsmith/null-buildpack/blob/master/bin/release
 
-# PATH="cmake-3.0.1/bin"
-PATH="pkg-config-0.28/bin:$PATH"
-PATH="cmake-3.0.2-Linux-i386/bin:$PATH"
+pkg_config_path = File.expand_path "pkg-config-0.28/bin"
+cmake_path      = File.expand_path "cmake-3.0.2-Linux-i386/bin"
+path = "#{pkg_config_path}:#{cmake_path}:#{ENV['PATH']}"
 
-echo "---"
-echo "PATH: $PATH"
+require 'yaml'
+puts YAML.dump(path)

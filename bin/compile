@@ -75,13 +75,13 @@ tar -xf "cmake-3.0.2.tar.gz"
 # Homepage: http://pkgconfig.freedesktop.org
 # This is derived from https://github.com/Homebrew/homebrew/blob/45e07c0e85c89583c675632ed3fb7da1a32a4180/Library/Formula/pkg-config.rb
 
-say "Curling pkg-config from http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz"
-curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-config-0.28.tar.gz
-tar -xf "pkg-config-0.28.tar.gz"
-cd "pkg-config-0.28"
-make
-make check
-cd ..
+# say "Curling pkg-config from http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz"
+# curl "http://pkgconfig.freedesktop.org/releases/pkg-config-0.28.tar.gz" > pkg-config-0.28.tar.gz
+# tar -xf "pkg-config-0.28.tar.gz"
+# cd "pkg-config-0.28"
+# make
+# make check
+# cd ..
 
 say "Here are all the executable files:"
 find . -type f -perm +111

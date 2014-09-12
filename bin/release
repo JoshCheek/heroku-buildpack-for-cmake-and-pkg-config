@@ -5,6 +5,6 @@
 
 pkg_config_path = File.expand_path "pkg-config-0.28/bin"
 cmake_path      = File.expand_path "cmake-3.0.2-Linux-i386/bin"
-path = "#{pkg_config_path}:#{cmake_path}:#{ENV['PATH']}"
+path            = "#{pkg_config_path}:#{cmake_path}:#{ENV['PATH']}"
 
 puts "PATH=#{path}"

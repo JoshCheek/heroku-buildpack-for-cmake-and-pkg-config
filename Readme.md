@@ -4,7 +4,12 @@ Going to see if I can't get that stuffs installed with this buildpack.
 
 ---
 
-Use [buildpack-multi](https://github.com/ddollar/heroku-buildpack-multi)
+# COME UPDATE THIS ONCE I GET IT WORKING
+
+Ref of how I faked out the node bullshit for https://github.com/vizify/heroku-buildpack-multi
+https://github.com/JoshCheek/miniature-octo-ironman/tree/8d9a471932faea0a96b39a4972ae77c05ff381a7
+
+Use [buildpack-multi](https://github.com/vizify/heroku-buildpack-multi)
 to add this to the build.
 Example of my [.buildpacks](https://github.com/JoshCheek/miniature-octo-ironman/blob/8d5cc7396a7fae3777387be921c6594c6bd4b5d5/.buildpacks).
 Example of setting it up in [my repo](https://github.com/JoshCheek/miniature-octo-ironman/):

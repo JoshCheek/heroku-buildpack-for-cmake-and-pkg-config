@@ -5,7 +5,7 @@
 
 # PATH="cmake-3.0.1/bin"
 PATH="pkg-config-0.28/bin:$PATH"
-PATH="cmake-3.0.2/bin:$PATH"
+PATH="cmake-3.0.2-Linux-i386/bin:$PATH"
 
 echo "---"
 echo "PATH: $PATH"

@@ -1,3 +1,14 @@
+# THIS NEVER *ACTUALLY* WORKED, AND I HAVE ABANDONED IT!!
+
+Spent 10-15 hours trying to get this to work.
+In the end, DigitalOcean was up and running with all this stuff on it in under an hour
+(and I'm really ignorant about how to do any of this stuff).
+So, I'm switching over to there, and am not going to try and get this sorted out.
+The Heroku buildpack environment, at present (22 Sep 2014) needs a lot of work,
+and I didn't feel like being the one to put it in for a project that I'm only half-serious about.
+
+---
+
 My app uses [rugged](http://rubygems.org/gems/rugged).
 To compile this, I need cmake and pkg-config.
 Going to see if I can't get that stuffs installed with this buildpack.
